@@ -1,0 +1,38 @@
+{
+  "name": "xora",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --color --env development --hot",
+    "build": "webpack --env production",
+    "serv": "static build",
+    "watch": "webpack -w --env production"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.4",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-minify-webpack-plugin": "^0.3.1",
+    "babel-preset-env": "^1.6.0",
+    "compression-webpack-plugin": "^1.0.1",
+    "crel": "^3.1.0",
+    "css-loader": "^0.28.0",
+    "exports-loader": "^0.7.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "html-webpack-plugin": "^2.28.0",
+    "node-sass": "^4.9.3",
+    "node-static": "^0.7.9",
+    "pikaday": "^1.7.0",
+    "postcss-loader": "^2.0.6",
+    "progress-bar-webpack-plugin": "^1.10.0",
+    "promise-polyfill": "^6.0.2",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.1",
+    "svg-inline-loader": "^0.8.0",
+    "webpack": "^2.3.3",
+    "webpack-dev-server": "^2.4.2",
+    "webpack-merge": "^4.1.0"
+  }
+}
