@@ -1,17 +1,15 @@
-const CompressionPlugin = require("compression-webpack-plugin");
-const minify = require('babel-minify-webpack-plugin');
+import minify from 'babel-minify-webpack-plugin';
+import CompressionPlugin from 'compression-webpack-plugin';
 
-module.exports = function() {
-    return {
-        plugins: [
-
-            new minify(),
-            new CompressionPlugin({
-                test: /\.js$|\.css$/,
-                threshold: 10240,
-                minRatio: 0
-            }),
-        ]
-    };
+export default () => {
+	return {
+		plugins: [
+			// new minify(),
+			new CompressionPlugin({
+				test: /\.js$|\.css$/,
+				threshold: 10240,
+				minRatio: 0
+			}),
+		]
+	}
 };
-

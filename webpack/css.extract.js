@@ -1,48 +1,49 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const autoprefixer = require('autoprefixer');
+import path from 'path';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import autoprefixer from 'autoprefixer';
 
-module.exports = function (paths) {
-    return {
-        module: {
-            rules: [
-                {
-                    test: /(\.css|\.scss)$/,
-                    include: paths,
-                    loader: ExtractTextPlugin.extract({
-                        publicPath: '../',
-                        fallback: 'style-loader',
-                        use: [
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    sourceMap: true,
-                                    minimize: true
-                                }
-                            },
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    plugins: [
-                                        autoprefixer({
-                                            browsers: ['ie >= 10', 'last 4 version']
-                                        })
-                                    ],
-                                    // sourceMap: true
-                                }
-                            },
-                            {
-                                loader: 'sass-loader',
-                                options: {
-                                    // sourceMap: true
-                                }
-                            }
-                        ]
+export default (paths) => {
+  return {
+    module: {
+      rules: [
+        {
+          test: /(\.css|\.scss)$/,
+          include: paths,
+          loader: ExtractTextPlugin.extract({
+            publicPath: '../',
+            fallback: 'style-loader',
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  root: path.resolve(__dirname, './source'),
+                },
+              }, {
+                loader: 'postcss-loader',
+                options: {
+                  ident: 'postcss',
+                  plugins: [
+                    autoprefixer({
+                      browsers: ['ie >= 10', 'last 4 version']
                     })
+                  ]
                 }
-            ],
-        },
-        plugins: [
-            new ExtractTextPlugin('./css/[name].css'),
-        ],
-    };
+              }, {
+                loader: 'sass-loader',
+                options: {
+                  data: '@import "./source/static/styles/vars";',
+                  includePaths: [
+                    path.resolve(__dirname, './source'),
+                  ],
+                },
+              }
+            ]
+          })
+        }
+      ],
+    },
+    plugins: [
+      new ExtractTextPlugin('./css/[name].css'),
+    ],
+  };
 };

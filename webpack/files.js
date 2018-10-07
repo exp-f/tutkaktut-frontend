@@ -1,16 +1,17 @@
-module.exports = function () {
+export default () => {
   return {
     module: {
       rules: [
         {
-          test: /\.html$/i,
-          loader: 'html-loader'
+          test: /\.vue$/,
+          loader: 'vue-loader'
         },
         {
-          test: /\.(jpeg|jpg|png|ico|gif|svg)$/i,
+          test: /\.(jpeg|jpg|png|svg|ico|gif|mp4|webm)$/i,
           loader: 'file-loader',
           options: {
-            name: 'images/[name].[ext]'
+            name: '[name].[ext]',
+            outputPath: 'images/',
           },
         },
         {
@@ -18,10 +19,9 @@ module.exports = function () {
           loader: 'file-loader',
           options: {
             name: 'fonts/[name].[ext]',
-            publicPath: '../',
           }
         }
       ],
-    },
-  };
+    }
+  }
 };

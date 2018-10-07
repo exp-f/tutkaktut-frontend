@@ -54,6 +54,6 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 *.lnk
-static/
 uploads/
 keys/
+build/

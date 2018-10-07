@@ -1,18 +1,19 @@
-module.exports = function() {
-    return {
-        module: {
-            rules: [
-                {
-                    test: /\.js$/,
-                    use: {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['env']
-                        }
-                    },
-                    exclude: [/node_modules/, /vendors/]
-                }
-            ],
+export default () => {
+  return {
+    module: {
+      rules: [
+        {
+          enforce: "pre",
+          test: /\.(js|vue)$/,
+          exclude: /node_modules/,
+          loader: "eslint-loader"
         },
-    };
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+          exclude: /node_modules/
+        }
+      ]
+    }
+  }
 };
