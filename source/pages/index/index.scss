@@ -1,0 +1,130 @@
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+@mixin placeholder {
+  @include optional-at-root('::-webkit-input-placeholder') {
+    @content;
+  }
+  @include optional-at-root(':-moz-placeholder') {
+    @content;
+  }
+  @include optional-at-root('::-moz-placeholder') {
+    @content;
+  }
+  @include optional-at-root(':-ms-input-placeholder') {
+    @content;
+  }
+}
+
+.block_1 {
+  padding-top: 120px;
+  padding-bottom: 90px;
+  background: url(~Assets/images/block_1_bg.png) right no-repeat #eef3f6;
+  background-size: contain;
+  &_title {
+    font-size: 35px;
+    font-weight: 700;
+    margin-bottom: 30px;
+  }
+  &_subtitle {
+    font-size: 20px;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  &_label {
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-weight: normal;
+  }
+  &_inputs_group {
+    display: flex;
+    margin-bottom: 15px;
+  }
+  &_input {
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    line-height: 1;
+    color: $white;
+    padding: 12px 20px;
+    background: #11598a;
+    font-family: 'Montserrat', sans-serif;
+    margin-right: 15px;
+    transition: $common_transition;
+    &:focus {
+      background: #0f4776;
+    }
+    @include placeholder {
+      color: $white;
+      opacity: 0.8;
+    }
+    &--lg {
+      flex: 0 0 320px;
+      max-width: 320px;
+    }
+    &--sm {
+      flex: 0 0 80px;
+      max-width: 80px;
+    }
+  }
+  &_selected {
+    background: #11598a;
+    color: $white;
+    width: 320px;
+    border-radius: 20px;
+    padding: 12px 20px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1;
+    &:before {
+      content: '';
+      background: url(~Assets/images/truck.svg);
+      background-size: contain;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      margin-right: 5px;
+    }
+  }
+  &_select {
+    position: relative;
+    &_dropdown {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      background: #11598a;
+      color: $white;
+      list-style: none;
+      padding-top: 20px;
+      border-radius: 0 0 20px 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: $common_transition;
+      cursor: pointer;
+      &_item {
+        padding: 12px 20px;
+        width: 320px;
+        transition: $common_transition;
+        cursor: pointer;
+        &:hover {
+          background: rgba(0, 0, 0, 0.1);
+        }
+        &:before {
+          content: '';
+          background: url(~Assets/images/truck.svg);
+          background-size: contain;
+          width: 20px;
+          height: 20px;
+          display: inline-block;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

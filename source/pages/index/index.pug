@@ -1,3 +1,25 @@
 extends ../../templates/Base/index
 block main
-  main.
+  main.main_container
+    .block_1
+      .block_1_wrapper.wrapper
+        form.block_1_form#delivery_form
+          h1.block_1_title Расчитать стоимость грузоперевозки
+          h3.block_1_subtitle Адреса
+          h4.block_1_label Откуда
+          .block_1_inputs_group
+            input.block_1_input.block_1_input--lg(placeholder='Улица', name='from_street', type='text')
+            input.block_1_input.block_1_input--sm(placeholder='Дом', name='from_house', type='text')
+            input.block_1_input.block_1_input--sm(placeholder='Кв.', name='from_apt', type='text')
+          h4.block_1_label Куда
+          .block_1_inputs_group
+            input.block_1_input.block_1_input--lg(placeholder='Улица', name='to_street', type='text')
+            input.block_1_input.block_1_input--sm(placeholder='Дом', name='to_house', type='text')
+            input.block_1_input.block_1_input--sm(placeholder='Кв.', name='to_apt', type='text')
+          h3.block_1_subtitle Машина
+          .block_1_select
+            input(type='hidden' name='car' value='1')
+            .block_1_selected Самара-Газель 4 метра
+            ul.block_1_select_dropdown
+              li.block_1_select_dropdown_item(data-value='1') Самара-Газель 3 метра
+              li.block_1_select_dropdown_item(data-value='2') Самара-Газель 4 метра

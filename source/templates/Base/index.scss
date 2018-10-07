@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i&subset=cyrillic,cyrillic-ext,latin-ext');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext');
 
 // reset
 * {
@@ -12,4 +12,9 @@ html {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   line-height: 1.2;
+}
+
+.wrapper {
+  max-width: $template_width;
+  margin: 0 auto;
 }
