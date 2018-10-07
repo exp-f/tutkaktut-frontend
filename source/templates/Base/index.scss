@@ -1,11 +1,15 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i&subset=cyrillic,cyrillic-ext,latin-ext');
+
 // reset
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
 }
 
 html {
+  font-family: 'Montserrat', sans-serif;
   font-size: 16px;
   line-height: 1.2;
 }
