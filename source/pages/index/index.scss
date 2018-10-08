@@ -24,16 +24,32 @@
   padding-bottom: 90px;
   background: url(~Assets/images/block_1_bg.png) right no-repeat #eef3f6;
   background-size: contain;
+  @media (max-width: $mobile_bp) {
+    padding: 70px 0;
+    background-position: bottom;
+  }
+  &_wrapper {
+    padding: 0 15px;
+  }
   &_title {
     font-size: 35px;
     font-weight: 700;
     margin-bottom: 30px;
+    @media (max-width: $mobile_bp) {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
   }
   &_subtitle {
     font-size: 20px;
     font-weight: 700;
     margin-top: 30px;
     margin-bottom: 20px;
+    @media (max-width: $mobile_bp) {
+      font-size: 16px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
   }
   &_label {
     font-size: 15px;
@@ -43,6 +59,9 @@
   &_inputs_group {
     display: flex;
     margin-bottom: 15px;
+    @media (max-width: $mobile_bp) {
+      flex-direction: column;
+    }
   }
   &_input {
     border: none;
@@ -55,20 +74,57 @@
     font-family: 'Montserrat', sans-serif;
     margin-right: 15px;
     transition: $common_transition;
+    width: 100%;
     &:focus {
       background: #0f4776;
+    }
+    @media (max-width: $mobile_bp) {
+      margin-bottom: 10px;
     }
     @include placeholder {
       color: $white;
       opacity: 0.8;
     }
     &--lg {
-      flex: 0 0 320px;
       max-width: 320px;
     }
     &--sm {
-      flex: 0 0 80px;
       max-width: 80px;
+    }
+    &--date {
+      max-width: 320px;
+      position: relative;
+      padding: 10px 20px;
+      margin-bottom: 30px;
+      &:before {
+        content: '';
+        background: url(~Assets/images/calendar.svg);
+        background-size: contain;
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        margin-right: 5px;
+      }
+      &:after {
+        content: '';
+        background: url(~Assets/images/down-arrow.svg);
+        background-size: contain;
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        justify-self: flex-end;
+        position: absolute;
+        right: 15px;
+        top: calc(50% - 5px);
+      }
+      input {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: $white;
+        font-size: inherit;
+        font-family: inherit;
+      }
     }
   }
   &_selected {
@@ -91,9 +147,21 @@
       display: inline-block;
       margin-right: 5px;
     }
+    &:after {
+      content: '';
+      background: url(~Assets/images/down-arrow.svg);
+      background-size: contain;
+      width: 10px;
+      height: 10px;
+      display: inline-block;
+      justify-self: flex-end;
+      position: absolute;
+      right: 15px;
+    }
   }
   &_select {
     position: relative;
+    margin-bottom: 20px;
     &_dropdown {
       position: absolute;
       top: 20px;

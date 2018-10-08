@@ -1,6 +1,9 @@
 .footer {
   background: rgba(4, 67, 110, 0.9);
   color: $white;
+  @media (max-width: $tablet_bp) {
+    display: none;
+  }
   &_wrapper {
     max-width: $template_width;
     margin: 0 auto;
@@ -8,30 +11,13 @@
     display: flex;
     justify-content: space-between;
     transition: $common_transition;
-    @media (max-width: $tablet_bp) {
-      padding-top: 65px;
-      flex-direction: column;
-      transform: translateY(-100vh);
-      .open & {
-        transform: translateY(0);
-      }
-    }
   }
   &_logo {
     align-self: center;
-    @media (max-width: $tablet_bp) {
-      align-self: flex-start;
-      margin-bottom: 20px;
-    }
   }
   &_menu {
     display: flex;
     align-items: center;
-    @media (max-width: $tablet_bp) {
-      align-items: flex-start;
-      flex-direction: column;
-      margin-bottom: 20px;
-    }
     &_item {
       margin: 0 30px;
       color: inherit;
@@ -41,9 +27,6 @@
       }
       &:last-child {
         margin-right: 0;
-      }
-      @media (max-width: $tablet_bp) {
-        margin: 10px 0;
       }
     }
   }

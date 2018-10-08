@@ -1,4 +1,7 @@
 import 'Templates/Base/index';
+import flatpickr from 'flatpickr';
+import { Russian } from 'flatpickr/dist/l10n/ru';
+import 'flatpickr/dist/flatpickr.css';
 import './index.scss';
 
 const closeDropdown = (e, a) => {
@@ -36,4 +39,11 @@ document.querySelectorAll('.block_1_select_dropdown_item').forEach((item) => {
     container.classList.remove('open');
     document.body.removeEventListener('click', closeDropdown);
   });
+});
+
+flatpickr(document.getElementById('date'), {
+  locale: Russian,
+  enableTime: true,
+  time_24hr: true,
+  dateFormat: 'd.m.Y H:i',
 });

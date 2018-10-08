@@ -18,3 +18,23 @@ html {
   max-width: $template_width;
   margin: 0 auto;
 }
+
+.btn {
+  border-radius: 30px;
+  border: none;
+  background: #fbba00;
+  font-size: 20px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #11598a;
+  width: 320px;
+  padding: 19px 0;
+  cursor: pointer;
+  transition: $common_transition;
+  &:hover {
+    filter: drop-shadow(0 0 5px rgba(251, 186, 0, 0.53));
+  }
+}
