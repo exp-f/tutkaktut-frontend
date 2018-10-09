@@ -8,14 +8,14 @@ block main
           h3.block_1_subtitle Адреса
           h4.block_1_label Откуда
           .block_1_inputs_group
-            input.block_1_input.block_1_input--lg(placeholder='Улица', name='from_street', type='text')
-            input.block_1_input.block_1_input--sm(placeholder='Дом', name='from_house', type='text')
-            input.block_1_input.block_1_input--sm(placeholder='Кв.', name='from_apt', type='text')
+            input.block_1_input.block_1_input--lg(placeholder='Улица', name='street_from', type='text')
+            input.block_1_input.block_1_input--sm(placeholder='Дом', name='house_from', type='text')
+            input.block_1_input.block_1_input--sm(placeholder='Кв.', name='appartment_from', type='text')
           h4.block_1_label Куда
           .block_1_inputs_group
-            input.block_1_input.block_1_input--lg(placeholder='Улица', name='to_street', type='text')
-            input.block_1_input.block_1_input--sm(placeholder='Дом', name='to_house', type='text')
-            input.block_1_input.block_1_input--sm(placeholder='Кв.', name='to_apt', type='text')
+            input.block_1_input.block_1_input--lg(placeholder='Улица', name='street_to', type='text')
+            input.block_1_input.block_1_input--sm(placeholder='Дом', name='house_to', type='text')
+            input.block_1_input.block_1_input--sm(placeholder='Кв.', name='appartment_to', type='text')
           h3.block_1_subtitle Машина
           .block_1_select
             input(type='hidden' name='car' value='1')
@@ -30,4 +30,53 @@ block main
                 input#date(type='text', name='datetime')
           input.btn.block_1_button(type='submit', value='Заказать')
     .block_2
-
+      .block_2_wrapper
+        .block_2_text_container
+          h1.block_2_title «TUT kak TUT»
+          p.block_2_text Быстрый вызов грузового автомобиля типа газель через мобильное приложение «TUTKAKTUT»
+          .block_2_links
+            a.block_2_link(href='#', target='_blank')
+              img(src=require('Assets/images/app_store.svg'))
+            a.block_2_link(href='#', target='_blank')
+              img(src=require('Assets/images/google-play-badge.png'))
+        h2.block_2_table_title Тарифы
+        .block_2_table_wrapper
+          table.tkt_table
+            thead
+              tr
+                th
+                th(colspan='2') Газель 3 метра
+                th(colspan='2') Газель 4 метра
+            tbody
+              tr
+                td
+                td Первый час
+                td Последующий час
+                td Первый час
+                td Последующий час
+              tr
+                td По городу
+                td 590 руб. час
+                td 450 руб. час
+                td 690 руб. час
+                td 490 руб. час
+              tr
+                td В пригород
+                td 990 руб. час
+                td 490 руб. час
+                td 1090 руб. час
+                td 540 руб. час
+              tr
+                td Между городами
+                td(colspan='2') 32 руб. км + 880 руб. (2 часа = 1 час на погрузку + 1 час на выгрузку)
+                td(colspan='2') 32 руб. км + 980 руб. (2 часа = 1 час на погрузку + 1 час на выгрузку)
+              tr
+                td Помощь водителя
+                td(colspan='4') 250 руб. час
+              tr
+                td Грузчики
+                td(colspan='4') 250 руб. час
+              tr
+                td Такелажные грузчики
+                td(colspan='4') 800 руб. 2 час (Не более 80 кг на человека,  минимальное время заказа 2 часа)
+        p.block_2_finetext Заявки с 21:00 до 6:00 +10% ко всему прайсу
