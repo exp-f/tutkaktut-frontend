@@ -12,6 +12,16 @@ const closeDropdown = (e, a) => {
   }
 };
 
+const buildDropdown = (list, contaner) => {
+  contaner.innerHTML = '';
+  list.forEach((item) => {
+    const elem = document.createElement('span');
+    elem.className = 'js-custom-dropdown';
+    elem.innerText = item;
+    contaner.appendChild(elem);
+  });
+};
+
 document.querySelector('.block_1_selected').addEventListener('click', (e) => {
   e.stopPropagation();
   const container = e.target.parentElement;
@@ -46,4 +56,22 @@ flatpickr(document.getElementById('date'), {
   enableTime: true,
   time_24hr: true,
   dateFormat: 'd.m.Y H:i',
+});
+
+let inputTimeout = null;
+
+document.querySelector('[name="street_from"]').addEventListener('input', (e) => {
+  if (inputTimeout) clearTimeout(inputTimeout);
+  const query = e.target.value;
+  if (!query) return false;
+  inputTimeout = setTimeout(() => {
+    fetch(`http://127.0.0.1:8000/ru/api/streets?city_id=14&term=${query}`, {
+      credentials: 'include',
+    })
+      .then(r => r.json())
+      .then((r) => {
+        buildDropdown(r, e.target.parentElement.querySelector('.js-address'));
+      });
+  }, 200);
+  return true;
 });

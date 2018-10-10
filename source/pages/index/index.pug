@@ -11,11 +11,13 @@ block main
             input.block_1_input.block_1_input--lg(placeholder='Улица', name='street_from', type='text')
             input.block_1_input.block_1_input--sm(placeholder='Дом', name='house_from', type='text')
             input.block_1_input.block_1_input--sm(placeholder='Кв.', name='appartment_from', type='text')
+            .js-address
           h4.block_1_label Куда
           .block_1_inputs_group
             input.block_1_input.block_1_input--lg(placeholder='Улица', name='street_to', type='text')
             input.block_1_input.block_1_input--sm(placeholder='Дом', name='house_to', type='text')
             input.block_1_input.block_1_input--sm(placeholder='Кв.', name='appartment_to', type='text')
+            .js-address
           h3.block_1_subtitle Машина
           .block_1_select
             input(type='hidden' name='car' value='1')
