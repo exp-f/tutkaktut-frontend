@@ -75,3 +75,13 @@ document.querySelector('[name="street_from"]').addEventListener('input', (e) => 
   }, 200);
   return true;
 });
+
+document.body.addEventListener('click', (e) => {
+  for (let element = e.target; element !== null; element = element.parentElement) {
+    if (element.matches('.js-custom-dropdown')) {
+      element.parentElement.parentElement.querySelector('input[type="text"]').value = element.innerText;
+      element.parentElement.innerHTML = '';
+      break;
+    }
+  }
+});

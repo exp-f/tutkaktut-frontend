@@ -59,6 +59,7 @@
   &_inputs_group {
     display: flex;
     margin-bottom: 15px;
+    position: relative;
     @media (max-width: $mobile_bp) {
       flex-direction: column;
     }
@@ -193,6 +194,30 @@
           display: inline-block;
           margin-right: 5px;
         }
+      }
+    }
+  }
+  .js-address {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 320px;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    border-radius: 0 0 20px 20px;
+    z-index: 10;
+    transition: $common_transition;
+    .js-custom-dropdown {
+      background: #0f4776;
+      color: $white;
+      font-size: 16px;
+      padding: 12px 20px;
+      cursor: pointer;
+      transition: $common_transition;
+      &:hover {
+        background: #04436e;
       }
     }
   }
