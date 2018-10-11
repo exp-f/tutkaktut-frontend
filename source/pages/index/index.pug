@@ -3,7 +3,7 @@ block main
   main.main_container
     .block_1
       .block_1_wrapper.wrapper
-        form.block_1_form#delivery_form
+        form.block_1_form#delivery_form(action='http://127.0.0.1:8000/ru/api/order/')
           h1.block_1_title Расчитать стоимость грузоперевозки
           h3.block_1_subtitle Адреса
           h4.block_1_label Откуда
@@ -28,9 +28,28 @@ block main
           .block_1_date
             .block_1_date_item
               .block_1_label Дата и время
-              .block_1_input.block_1_input--date
+              label.block_1_input.block_1_input--date
                 input#date(type='text', name='datetime')
           input.btn.block_1_button(type='submit', value='Заказать')
+    .popup_wrapper
+      .popup
+        .popup_close
+        h2.popup_title Вы хотите арендовать
+        p.popup_text
+        .popup_inputs_group
+          .popup_input
+            .popup_label Имя
+            input(type='text', placeholder='Ваше имя', name='name')
+            .popup_label Номер телефона
+            input(type='text', placeholder='+7 (000)-000-00-00', name='phone')
+        .popup_textarea
+          textarea(name='comment', placeholder='Комментарий к заказу', required)
+        label.popup_checkbox
+          input(type='checkbox', name='agree')
+          span.popup_check
+          span.popup_checkbox_label Я даю согласие на обработку персональных данных
+        .btn Отправить
+
     .block_2
       .block_2_wrapper
         .block_2_text_container

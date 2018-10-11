@@ -68,6 +68,7 @@
     border: none;
     outline: none;
     border-radius: 20px;
+    font-size: 16px;
     line-height: 1;
     color: $white;
     padding: 12px 20px;
@@ -97,6 +98,8 @@
       position: relative;
       padding: 10px 20px;
       margin-bottom: 30px;
+      display: block;
+      cursor: pointer;
       &:before {
         content: '';
         background: url(~Assets/images/calendar.svg);
@@ -207,10 +210,13 @@
     flex-direction: column;
     overflow: auto;
     border-radius: 0 0 20px 20px;
-    z-index: 10;
-    transition: $common_transition;
+    z-index: -1;
+    background: #0f4776;
+    padding-top: 20px;
+    &:not(:empty) {
+      z-index: 10;
+    }
     .js-custom-dropdown {
-      background: #0f4776;
       color: $white;
       font-size: 16px;
       padding: 12px 20px;

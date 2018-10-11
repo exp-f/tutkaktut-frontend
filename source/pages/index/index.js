@@ -4,6 +4,7 @@ import { Russian } from 'flatpickr/dist/l10n/ru';
 import 'flatpickr/dist/flatpickr.css';
 import './index.scss';
 
+const url = 'http://127.0.0.1:8000/ru/';
 const closeDropdown = (e, a) => {
   if (!e.target.matches('.block_1_select_dropdown > *')) {
     document.querySelector('.open').classList.remove('open');
@@ -12,13 +13,13 @@ const closeDropdown = (e, a) => {
   }
 };
 
-const buildDropdown = (list, contaner) => {
-  contaner.innerHTML = '';
+const buildDropdown = (list, container) => {
+  container.innerHTML = '';
   list.forEach((item) => {
     const elem = document.createElement('span');
     elem.className = 'js-custom-dropdown';
     elem.innerText = item;
-    contaner.appendChild(elem);
+    container.appendChild(elem);
   });
 };
 
@@ -56,30 +57,37 @@ flatpickr(document.getElementById('date'), {
   enableTime: true,
   time_24hr: true,
   dateFormat: 'd.m.Y H:i',
+  defaultDate: new Date(),
 });
 
 let inputTimeout = null;
 
-document.querySelector('[name="street_from"]').addEventListener('input', (e) => {
+const searchAddress = (e) => {
   if (inputTimeout) clearTimeout(inputTimeout);
   const query = e.target.value;
   if (!query) return false;
   inputTimeout = setTimeout(() => {
-    fetch(`http://127.0.0.1:8000/ru/api/streets?city_id=14&term=${query}`, {
+    fetch(`${url}/api/streets?city_id=14&term=${query}`, {
       credentials: 'include',
     })
       .then(r => r.json())
       .then((r) => {
+        e.target.style.zIndex = '11';
         buildDropdown(r, e.target.parentElement.querySelector('.js-address'));
       });
   }, 200);
   return true;
-});
+};
+
+document.querySelector('[name="street_from"]').addEventListener('input', searchAddress);
+document.querySelector('[name="street_to"]').addEventListener('input', searchAddress);
 
 document.body.addEventListener('click', (e) => {
   for (let element = e.target; element !== null; element = element.parentElement) {
     if (element.matches('.js-custom-dropdown')) {
-      element.parentElement.parentElement.querySelector('input[type="text"]').value = element.innerText;
+      const input = element.parentElement.parentElement.querySelector('input[type="text"]');
+      input.value = element.innerText;
+      input.style.zIndex = '';
       element.parentElement.innerHTML = '';
       break;
     }
