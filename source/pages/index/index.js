@@ -93,3 +93,41 @@ document.body.addEventListener('click', (e) => {
     }
   }
 });
+
+document.getElementById('delivery_form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const orderStr = `${document.querySelector('.block_1_selected').innerText} / ${formData.get('datetime')} /` +
+    ` С ${formData.get('street_from')}, ${formData.get('house_from')}, кв ${formData.get('appartment_from')}` +
+    ` / До ${formData.get('street_to')}, ${formData.get('house_to')}, кв ${formData.get('appartment_to')}`;
+  console.log(orderStr);
+  const popup = document.querySelector('.popup');
+  popup.querySelector('.popup_text').innerText = orderStr;
+  popup.parentElement.classList.add('open');
+});
+
+document.querySelector('.popup_close').addEventListener('click', (e) => {
+  e.target.parentElement.parentElement.classList.remove('open');
+});
+
+document.getElementById('finalPopup').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const finalFormData = new FormData(e.target);
+  const formData = new FormData(document.getElementById('delivery_form'));
+  if (!finalFormData.has('agree')) return console.log('Вы должны согласиться на обработку персональных данных');
+  const datetime = formData.get('datetime').split(' ');
+  formData.set('phone', finalFormData.get('phone'));
+  // formData.set('name', finalFormData.get('name'));
+  formData.set('comment', finalFormData.get('comment'));
+  formData.set('date', datetime[0]);
+  formData.set('time', datetime[1]);
+  return fetch(`${url}${document.getElementById('delivery_form').getAttribute('action')}`, {
+    method: 'post',
+    body: formData,
+    credentials: 'include',
+  })
+    .then(r => r.json())
+    .then((r) => {
+      console.log(r);
+    });
+});
