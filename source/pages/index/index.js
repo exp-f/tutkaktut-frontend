@@ -1,6 +1,7 @@
 import 'Templates/Base/index';
 import flatpickr from 'flatpickr';
 import { Russian } from 'flatpickr/dist/l10n/ru';
+import ymaps from 'ymaps';
 import 'flatpickr/dist/flatpickr.css';
 import './index.scss';
 
@@ -22,7 +23,22 @@ const buildDropdown = (list, container) => {
   });
 };
 
+const msgPopup = (msg) => {
+  const popup = document.getElementById('msg_popup');
+  popup.querySelector('.popup_text').innerText = msg;
+  popup.classList.add('open');
+};
 
+const initMap = () => {
+  ymaps.load().then((maps) => {
+    const myMap = new maps.Map('about-ymap-outer', {
+      center: [53.199300, 50.130600],
+      zoom: 14,
+    }, {
+      minZoom: 5,
+    });
+  });
+};
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('.block_1_selected').addEventListener('click', (e) => {
     e.stopPropagation();
@@ -68,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const query = e.target.value;
     if (!query) return false;
     inputTimeout = setTimeout(() => {
-      fetch(`api/streets?city_id=14&term=${query}`, {
+      fetch(`/api/streets?city_id=14&term=${query}`, {
         credentials: 'include',
       })
         .then(r => r.json())
@@ -92,6 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
         element.parentElement.innerHTML = '';
         break;
       }
+      if (element.matches('.popup_close')) {
+        element.parentElement.parentElement.classList.remove('open');
+        break;
+      }
     }
   });
 
@@ -102,20 +122,16 @@ document.addEventListener('DOMContentLoaded', () => {
       ` С ${formData.get('street_from')}, ${formData.get('house_from')}, кв ${formData.get('appartment_from')}` +
       ` / До ${formData.get('street_to')}, ${formData.get('house_to')}, кв ${formData.get('appartment_to')}`;
     console.log(orderStr);
-    const popup = document.querySelector('.popup');
+    const popup = document.querySelector('#finalPopup');
     popup.querySelector('.popup_text').innerText = orderStr;
     popup.parentElement.classList.add('open');
-  });
-
-  document.querySelector('.popup_close').addEventListener('click', (e) => {
-    e.target.parentElement.parentElement.classList.remove('open');
   });
 
   document.getElementById('finalPopup').addEventListener('submit', (e) => {
     e.preventDefault();
     const finalFormData = new FormData(e.target);
     const formData = new FormData(document.getElementById('delivery_form'));
-    if (!finalFormData.has('agree')) return console.log('Вы должны согласиться на обработку персональных данных');
+    if (!finalFormData.has('agree')) return msgPopup('Вы должны согласиться на обработку персональных данных');
     const datetime = formData.get('datetime').split(' ');
     formData.set('phone', finalFormData.get('phone'));
     // formData.set('name', finalFormData.get('name'));
@@ -129,7 +145,11 @@ document.addEventListener('DOMContentLoaded', () => {
     })
       .then(r => r.json())
       .then((r) => {
-        console.log(r);
+        if (r.sent) {
+          return msgPopup('Ваш заказ успешно создан!');
+        }
+        return msgPopup('Произошла ошибка при создании заказа');
       });
   });
+  initMap();
 });

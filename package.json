@@ -42,6 +42,7 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "flatpickr": "^4.5.2"
+    "flatpickr": "^4.5.2",
+    "ymaps": "^0.1.1"
   }
 }
